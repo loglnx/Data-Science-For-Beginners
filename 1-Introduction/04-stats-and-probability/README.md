@@ -133,6 +133,51 @@ An example of calculating confidence interval for weights and heights is given i
 
 Notice that the higher is the confidence probability, the wider is the confidence interval. 
 
+**什么是置信区间**
+
+置信区间是一种统计学术语，它表示对一个总体参数（比如平均值、比例、差异等）的区间估计。置信区间的意思是，如果我们重复抽取样本并计算置信区间，那么有一定的概率（称为置信水平或置信度）这个区间包含了总体参数的真实值。通俗地说，置信区间就是我们对总体参数的一个合理的猜测范围，置信水平就是我们对这个猜测的可信程度。 ¹³
+
+例如，假设我们想要估计中国成年男性的平均身高，我们随机抽取了1000名男性并测量了他们的身高，得到了一个样本平均值为172厘米，一个样本标准差为8厘米。假设身高服从正态分布，那么我们可以用下面的公式计算平均身高的95%置信区间：
+
+$$\overline{x} \pm z_{\alpha/2} \frac{s}{\sqrt{n}}$$
+
+其中$\overline{x}$是样本平均值，$z_{\alpha/2}$是标准正态分布的$\alpha/2$分位数（$\alpha$是非置信水平，在这里是0.05），$s$是样本标准差，$n$是样本容量。将数据代入公式，得到：
+
+$$172 \pm 1.96 \frac{8}{\sqrt{1000}}$$
+
+简化后得到：
+
+$$172 \pm 0.49$$
+
+所以95%置信区间是**[171.51, 172.49]**厘米。这个区间的意义是，如果我们反复抽取1000名男性并计算他们的平均身高的置信区间，那么有95%的概率这些区间包含了中国成年男性的真实平均身高。²⁴
+
+如果你想了解更多关于置信区间的知识，你可以参考以下链接：
+
+¹: [什么是置信区间，怎么通俗的理解这个东西？ - 知乎](https://www.zhihu.com/question/419528076)
+
+²: [通俗易懂告诉你：何为95%置信区间？ - 知乎 - 知乎专栏](https://zhuanlan.zhihu.com/p/133720238)
+
+³: [置信区间_百度百科](https://baike.baidu.com/item/%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4/7442583)
+
+⁴: [置信区间 - MBA智库百科](https://wiki.mbalib.com/wiki/%E7%BD%AE%E4%BF%A1%E5%8C%BA%E9%97%B4)
+
+**Zα/2 怎么得到的**
+
+Zα/2是标准正态分布的α/2分位数，也就是说，它是满足P(Z < Zα/2) = α/2的那个数。Zα/2的值可以通过查标准正态分布表得到。具体的步骤如下：
+
+- 首先确定你要查的置信水平或显著性水平，比如95%或0.05。
+- 然后计算α/2的值，比如0.05/2 = 0.025。
+- 接着找到1 - α/2的值，比如1 - 0.025 = 0.975。
+- 最后在标准正态分布表中，找到与0.975最接近的概率值，以及它对应的行和列，将行和列的值相加，就得到了Zα/2的值。比如0.975对应的行是1.9，列是0.06，所以Zα/2 = 1.9 + 0.06 = 1.96。¹²
+
+如果你想了解更多关于Zα/2的知识，你可以参考以下链接：
+
+¹: [统计学中，Zα/2是怎么查出来的？很多答案都说在正态分布表查的，但是具体是怎么查的，我搞不懂。求救_百度知道](https://zhidao.baidu.com/question/2208082720412377788.html)
+
+²: [za/2怎么查表-百度经验](https://jingyan.baidu.com/article/e3c78d640fd5ae7d4d85f545.html)
+
+
+
 ## Hypothesis Testing 
 
 In our baseball players dataset, there are different player roles, that can be summarized below (look at the [accompanying notebook](notebook.ipynb) to see how this table can be calculated):
@@ -201,7 +246,7 @@ From the central limit theorem it also follows that, when N&rarr;&infin;, the pr
 
 One of the things Data Science does is finding relations between data. We say that two sequences **correlate** when they exhibit the similar behavior at the same time, i.e. they either rise/fall simultaneously, or one sequence rises when another one falls and vice versa. In other words, there seems to be some relation between two sequences.
 
-> Correlation does not necessarily indicate causal relationship between two sequences; sometimes both variables can depend on some external cause, or it can be purely by chance the two sequences correlate. However, strong mathematical correlation is a good indication that two variables are somehow connected.
+> Correlation does not necessarily indicate causal relationship between two sequences; sometimes both variables can depend on some external cause, or it can be purely by chance the two sequences correlate. However, strong mathematical Correlation is a good indication that two variables are somehow connected.
 
  Mathematically, the main concept that shows the relation between two random variables is **covariance**, that is computed like this: Cov(X,Y) = **E**\[(X-**E**(X))(Y-**E**(Y))\]. We compute the deviation of both variables from their mean values, and then product of those deviations. If both variables deviate together, the product would always be a positive value, that would add up to positive covariance. If both variables deviate out-of-sync (i.e. one falls below average when another one rises above average), we will always get negative numbers, that will add up to negative covariance. If the deviations are not dependent, they will add up to roughly zero.
 
